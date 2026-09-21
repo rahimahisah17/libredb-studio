@@ -1,3 +1,29 @@
+# 🤝 My contributions to LibreDB Studio
+
+> **This repository is my fork of [libredb/libredb-studio](https://github.com/libredb/libredb-studio).** LibreDB Studio is an open-source, MIT-licensed SQL IDE that belongs to its authors and contributors. I use this fork to prepare and submit contributions, and the original project README is kept below.
+
+## Merged pull requests
+
+| Pull request | What I changed | Fixes | Merged |
+|---|---|---|---|
+| [#1039](https://github.com/libredb/libredb-studio/pull/1039) `fix(docker): publish the Postgres containers on loopback only` | Three Docker Compose files published a Postgres container with default credentials on every network interface. I bound port 5432 to `127.0.0.1` in `docker-compose.yml`, `docker/postgres.yml` and `database-compose.yml`, checked the docs for anything that relied on the open port, and verified each file with `docker compose config`. | [#1011](https://github.com/libredb/libredb-studio/issues/1011) | 2026-09-21 |
+| [#1041](https://github.com/libredb/libredb-studio/pull/1041) `fix(docker): mount the postgres:18 data volume at /var/lib/postgresql` | `postgres:18` expects its data volume at `/var/lib/postgresql`, but the Compose files mounted `/var/lib/postgresql/data`, so the database container exited at startup and never loaded its seed data. I reproduced the failure on a fresh volume, fixed the mount in `docker-compose.yml`, `docker/postgres.yml`, `docker-compose.example.yml` and the `docs/STORAGE.md` snippet, and added a note on how to migrate a volume from the old layout. | [#792](https://github.com/libredb/libredb-studio/issues/792) | 2026-09-21 |
+
+## How I worked
+
+- Reproduced each problem before changing anything, and tested the fix with the project's real Compose files: the database container started healthy and loaded its seed data (the `libredb_dev` database with 10 tables).
+- Kept each pull request small and focused, with a description of what changed and how it was checked.
+- Responded to the maintainer's review on #1041 by covering two more places that had the same problem, and confirmed that no other file in the repository still used the old path.
+- Both pull requests were reviewed and merged by the maintainer, with CI passing.
+
+---
+
+## Original README
+
+*Everything below is the original project README from [libredb/libredb-studio](https://github.com/libredb/libredb-studio).*
+
+---
+
 <p align="center">
   <img src="public/logo.svg" width="200" alt="LibreDB Studio Logo" />
 </p>
