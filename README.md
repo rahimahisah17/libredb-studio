@@ -1,4 +1,4 @@
-# 🤝 My contributions to LibreDB Studio
+# My contributions to LibreDB Studio
 
 > **This repository is my fork of [libredb/libredb-studio](https://github.com/libredb/libredb-studio).** LibreDB Studio is an open-source, MIT-licensed SQL IDE that belongs to its authors and contributors. I use this fork to prepare and submit contributions, and the original project README is kept below.
 
